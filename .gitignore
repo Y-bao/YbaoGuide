@@ -13,6 +13,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.iml
 
 # Windows shortcuts
 *.lnk
@@ -27,6 +28,9 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
+.gradle
+.idea
+build
 
 # Thumbnails
 ._*
