@@ -13,12 +13,13 @@ import java.util.List;
  */
 
 public class Indicator {
-    private Guide.Builder builder;
     public static int VIEW_ONESEIF = 0;
     public static int RECTANGLE = 1;
     public static int ROUND_RECTANGLE = 2;
     public static int CIRCLE = 3;
     public static int OVAL = 4;
+    private Guide.Builder builder;
+    private String tag;
     private View targetView;
     private int mode;
     private int padding = 0;
@@ -68,6 +69,11 @@ public class Indicator {
 
     public Indicator setPadding(int padding) {
         this.padding = padding;
+        return this;
+    }
+
+    public Indicator setTag(String tag) {
+        this.tag = tag;
         return this;
     }
 
@@ -130,6 +136,10 @@ public class Indicator {
 
     public int getMode() {
         return mode;
+    }
+
+    public String getTag() {
+        return tag;
     }
 
     RectF getRectF() {

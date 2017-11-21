@@ -122,6 +122,10 @@ public class Guide {
         }
     };
 
+    public void setOnTouchGuideListener(GuideGroup.OnTouchGuideListener onTouchGuideListener) {
+        this.onTouchGuideListener = onTouchGuideListener;
+    }
+
     public interface OnShowListener {
         void onShow();
 

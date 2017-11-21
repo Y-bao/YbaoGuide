@@ -20,7 +20,7 @@ import java.util.List;
  * Created by ybao on 2017/11/11.
  */
 
-class GuideGroup extends FrameLayout {
+public class GuideGroup extends FrameLayout {
     private List<Indicator> indicators;
     private HashMap<Indicator, List<AttachedView>> arrachedViewMap;
     private OverrideView overrideView;
