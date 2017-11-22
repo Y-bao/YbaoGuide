@@ -44,8 +44,7 @@ class AnkoActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@AnkoActivity, 2)
         }
         rv.adapter = adapter
-
-        val guide = Guide.Builder(this)
+        Guide.Builder(this)
                 .setBackgroundColor(Color.parseColor("#aa000000"))
                 .addIndicator(object : Indicator() {
                     var listener = ViewTreeObserver.OnGlobalLayoutListener {
@@ -75,7 +74,7 @@ class AnkoActivity : AppCompatActivity() {
                 )
                 .complete()
                 .create()
-        guide.setCancelable(false).show()
+                .setCancelable(false).show()
         run.run()
     }
 
