@@ -1,5 +1,7 @@
 package com.ybao.guide
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -23,6 +25,11 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
  */
 
 class AnkoActivity : AppCompatActivity() {
+    companion object {
+        fun newIntent(context: Context): Intent {
+            return Intent(context, AnkoActivity.javaClass)
+        }
+    }
 
     private var h = Handler(Looper.getMainLooper())
     private var s = 5
