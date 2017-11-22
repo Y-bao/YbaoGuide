@@ -94,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
         }
         val tagView = LayoutInflater.from(this).inflate(layoutId, null, false)
         val txtTag = tagView.findViewById<TextView>(R.id.txt_tag)
-        txtTag.setText(msg)
+        txtTag.text = msg
         return tagView
     }
 }
