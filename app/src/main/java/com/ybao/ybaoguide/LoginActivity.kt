@@ -70,13 +70,14 @@ class LoginActivity : AppCompatActivity() {
                 .complete()
                 .create()
 
-        guide.setOnTouchGuideListener({ indicator ->
+        guide.setOnTouchGuideListener { indicator ->
             Toast.makeText(this@LoginActivity, "Click " + indicator?.tag, Toast.LENGTH_SHORT).show()
             true
-        })
+        }
         guide.show()
         button.setOnClickListener { guide.show() }
     }
+
 
     fun createTagView(msg: String, d: Int): View {
         val layoutId = when (d) {
@@ -93,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
         }
         val tagView = LayoutInflater.from(this).inflate(layoutId, null, false)
         val txtTag = tagView.findViewById<TextView>(R.id.txt_tag)
-        txtTag.setText(msg);
-        return tagView;
+        txtTag.setText(msg)
+        return tagView
     }
 }
