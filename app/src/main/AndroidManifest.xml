@@ -28,6 +28,9 @@
         <activity
             android:name="com.ybao.guide.AnkoActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.ybao.guide.FollowingActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

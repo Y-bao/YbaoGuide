@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
                 topMargin = dip(10)
                 width = ViewGroup.LayoutParams.MATCH_PARENT
             }
+            button("移动跟随") {
+                onClick { startActivity(FollowingActivity.newIntent(this@MainActivity)) }
+            }.lparams {
+                topMargin = dip(10)
+                width = ViewGroup.LayoutParams.MATCH_PARENT
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.ybao.guide
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -17,22 +19,30 @@ import org.jetbrains.anko.scrollView
  * Created by Y-bao on 2017/11/22 0022.
  */
 class FollowingActivity : AppCompatActivity() {
+    companion object {
+        fun newIntent(context: Context): Intent {
+            return Intent(context, FollowingActivity::class.java)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var btn5: Button? = null
         scrollView {
             linearLayout {
                 orientation = LinearLayout.VERTICAL
-                button("1").lparams(150, 150)
-                button("2").lparams(150, 150)
-                button("3").lparams(150, 150)
-                button("4").lparams(150, 150)
-                btn5 = button("5").lparams(150, 150)
-                button("6").lparams(150, 150)
-                button("7").lparams(150, 150)
-                button("8").lparams(150, 150)
-                button("9").lparams(150, 150)
-                button("10").lparams(150, 150)
+                gravity = Gravity.CENTER_HORIZONTAL
+                var size=dip(150)
+                button("1").lparams(size, size)
+                button("2").lparams(size, size)
+                button("3").lparams(size, size)
+                button("4").lparams(size, size)
+                btn5 = button("5").lparams(size, size)
+                button("6").lparams(size, size)
+                button("7").lparams(size, size)
+                button("8").lparams(size, size)
+                button("9").lparams(size, size)
+                button("10").lparams(size, size)
             }.lparams {
                 width = ViewGroup.LayoutParams.MATCH_PARENT
             }
