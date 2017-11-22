@@ -23,6 +23,10 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
  */
 
 class AnkoActivity : AppCompatActivity() {
+
+    private var h = Handler(Looper.getMainLooper())
+    private var s = 5
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var rv = recyclerView {
@@ -50,7 +54,8 @@ class AnkoActivity : AppCompatActivity() {
                         super.onDetached()
                         rv.viewTreeObserver.removeOnGlobalLayoutListener(listener);
                     }
-                })
+                }).setMode(Indicator.ROUND_RECTANGLE)
+                .setCorners(dip(8))
                 .addAttachedView(
                         AttachedView(createTagView("可监听延时加载的控件", 2))
                                 .setGravityX(AttachedView.GRAVITY_TO_TARGET, Gravity.CENTER_HORIZONTAL)
@@ -63,24 +68,27 @@ class AnkoActivity : AppCompatActivity() {
                 )
                 .complete()
                 .create()
-
-        guide.setOnClickIndicatorListener { idt ->
-            showToastMsg("Click " + idt?.tag)
-            true
-        }
         guide.show()
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            var list = ArrayList<String>()
-            for (i in 0..100) {
-                list.add("$i")
-            }
-            adapter.data = list;
-        }, 2000)
+        run.run()
     }
 
+    private var run = object : Runnable {
+        override fun run() {
+            if (s < 0) {
+                var list = ArrayList<String>()
+                for (i in 0..100) {
+                    list.add("$i")
+                }
+                adapter.data = list
+            } else {
+                showToastMsg("加载数据倒计时:${s}s")
+                h.postDelayed(this, 1000)
+                s--
+            }
+        }
+    }
 
-    var adapter = object : StandardAdapter<StandardAdapter.ItemViewHolder, String>() {
+    private var adapter = object : StandardAdapter<StandardAdapter.ItemViewHolder, String>() {
         override fun onBindViewHolder(holder: ItemViewHolder?, position: Int) {
             super.onBindViewHolder(holder, position)
             holder?.itemView?.find<TextView>(0x00000001)?.text = "item : " + getItemData(position)

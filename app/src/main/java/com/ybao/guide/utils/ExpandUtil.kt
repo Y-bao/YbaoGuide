@@ -13,19 +13,19 @@ import com.ybao.guide.R
 var toast: Toast? = null
 
 private fun createToast(context: Context): Toast {
-    if (toast == null) {
-        toast = Toast.makeText(context, "", Toast.LENGTH_SHORT)
-    }
+    toast?.cancel()
+    toast = Toast.makeText(context, "", Toast.LENGTH_SHORT)
     return toast!!
 }
 
 fun View.showToastMsg(msg: String) {
-    this.context.showToastMsg(msg);
+    this.context.showToastMsg(msg)
 }
 
 fun Context.showToastMsg(msg: String) {
     var toast = createToast(this)
     toast.setText(msg)
+    toast.duration = Toast.LENGTH_SHORT
     toast.show()
 }
 
