@@ -23,6 +23,8 @@ public class Guide {
     private GuideGroup guideGroup;
     OnShowListener onShowListener;
     OnClickIndicatorListener onClickIndicatorListener;
+    boolean cancelable = true;
+    boolean canceledOnTouchOutside = true;
 
     private Guide(Context context, List<Indicator> indicators) {
         this.context = context;
@@ -48,6 +50,22 @@ public class Guide {
 
     public Guide setFocusable(boolean focusable) {
         this.guideGroup.setFocusable(focusable);
+        return this;
+    }
+
+    public Guide setCancelable(boolean cancelable) {
+        this.cancelable = cancelable;
+        if (!cancelable) {
+            canceledOnTouchOutside = false;
+        }
+        return this;
+    }
+
+    public Guide setCanceledOnTouchOutside(boolean canceledOnTouchOutside) {
+        this.canceledOnTouchOutside = canceledOnTouchOutside;
+        if (canceledOnTouchOutside) {
+            cancelable = true;
+        }
         return this;
     }
 
@@ -105,13 +123,17 @@ public class Guide {
 
         @Override
         public boolean onTouchOverride() {
-            dismiss();
+            if (canceledOnTouchOutside) {
+                dismiss();
+            }
             return false;
         }
 
         @Override
         public boolean onKeyBack() {
-            dismiss();
+            if (cancelable) {
+                dismiss();
+            }
             return true;
         }
     };

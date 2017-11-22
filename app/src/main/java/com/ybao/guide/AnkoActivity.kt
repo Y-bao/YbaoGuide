@@ -68,7 +68,7 @@ class AnkoActivity : AppCompatActivity() {
                 )
                 .complete()
                 .create()
-        guide.show()
+        guide.setCancelable(false).show()
         run.run()
     }
 
