@@ -115,9 +115,6 @@ public class GuideGroup extends FrameLayout {
         if (arrachedViewMap == null) {
             return;
         }
-        if (!indicator.canUse()) {
-            return;
-        }
         List<AttachedView> attachedViews = arrachedViewMap.get(indicator);
         if (attachedViews == null || attachedViews.isEmpty()) {
             return;
@@ -127,6 +124,11 @@ public class GuideGroup extends FrameLayout {
         RectF rectF = indicator.getRectF();
         for (AttachedView attachedView : attachedViews) {
             View view = attachedView.getView();
+            if (!indicator.canUse()) {
+                view.setVisibility(View.GONE);
+                continue;
+            }
+            view.setVisibility(View.VISIBLE);
             float tx = 0;
             if (attachedView.getGravityWayX() == AttachedView.GRAVITY_TO_PARENT) {
                 int gravity = attachedView.getGravityX();
