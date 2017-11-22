@@ -27,7 +27,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 class AnkoActivity : AppCompatActivity() {
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, AnkoActivity.javaClass)
+            return Intent(context, LoginActivity::class.java)
         }
     }
 

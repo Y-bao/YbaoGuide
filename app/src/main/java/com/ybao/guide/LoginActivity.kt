@@ -17,7 +17,7 @@ import org.jetbrains.anko.dip
 class LoginActivity : AppCompatActivity() {
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, LoginActivity.javaClass)
+            return Intent(context, LoginActivity::class.java)
         }
     }
 
