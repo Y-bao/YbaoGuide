@@ -6,12 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.ybao.guide.AttachedView
 import com.ybao.guide.Guide
-import com.ybao.guide.GuideGroup
 import com.ybao.guide.Indicator
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -72,19 +70,9 @@ class LoginActivity : AppCompatActivity() {
                 .complete()
                 .create()
 
-        guide.setOnTouchGuideListener(object : GuideGroup.OnTouchGuideListener {
-            override fun onClickIndicator(indicator: Indicator?): Boolean {
-                Toast.makeText(this@LoginActivity, "Click " + indicator?.tag, Toast.LENGTH_SHORT).show()
-                return true
-            }
-
-            override fun onTouchOverride(): Boolean {
-                return false
-            }
-
-            override fun onKeyBack(): Boolean {
-                return false
-            }
+        guide.setOnTouchGuideListener({ indicator ->
+            Toast.makeText(this@LoginActivity, "Click " + indicator?.tag, Toast.LENGTH_SHORT).show()
+            true
         })
         guide.show()
         button.setOnClickListener { guide.show() }

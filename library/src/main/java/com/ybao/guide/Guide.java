@@ -22,7 +22,7 @@ public class Guide {
     Context context;
     private GuideGroup guideGroup;
     OnShowListener onShowListener;
-    GuideGroup.OnTouchGuideListener onTouchGuideListener;
+    OnClickIndicatorListener onClickIndicatorListener;
 
     private Guide(Context context, List<Indicator> indicators) {
         this.context = context;
@@ -97,39 +97,37 @@ public class Guide {
     GuideGroup.OnTouchGuideListener inOnTouchGuideListener = new GuideGroup.OnTouchGuideListener() {
         @Override
         public boolean onClickIndicator(Indicator indicator) {
-            if (onTouchGuideListener != null) {
-                return onTouchGuideListener.onClickIndicator(indicator);
+            if (onClickIndicatorListener != null) {
+                return onClickIndicatorListener.onClickIndicator(indicator);
             }
             return false;
         }
 
         @Override
         public boolean onTouchOverride() {
-            if (onTouchGuideListener != null && onTouchGuideListener.onTouchOverride()) {
-                return true;
-            }
             dismiss();
             return false;
         }
 
         @Override
         public boolean onKeyBack() {
-            if (onTouchGuideListener != null && onTouchGuideListener.onKeyBack()) {
-                return true;
-            }
             dismiss();
             return true;
         }
     };
 
-    public void setOnTouchGuideListener(GuideGroup.OnTouchGuideListener onTouchGuideListener) {
-        this.onTouchGuideListener = onTouchGuideListener;
+    public void setOnTouchGuideListener(OnClickIndicatorListener onClickIndicatorListener) {
+        this.onClickIndicatorListener = onClickIndicatorListener;
     }
 
     public interface OnShowListener {
         void onShow();
 
         void onDismiss();
+    }
+
+    public interface OnClickIndicatorListener {
+        boolean onClickIndicator(Indicator indicator);
     }
 
     public static class Builder {
