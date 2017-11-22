@@ -116,7 +116,7 @@ public class Guide {
         }
     };
 
-    public void setOnTouchGuideListener(OnClickIndicatorListener onClickIndicatorListener) {
+    public void setOnClickIndicatorListener(OnClickIndicatorListener onClickIndicatorListener) {
         this.onClickIndicatorListener = onClickIndicatorListener;
     }
 

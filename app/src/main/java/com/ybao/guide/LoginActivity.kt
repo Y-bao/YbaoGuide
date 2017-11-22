@@ -1,4 +1,4 @@
-package com.ybao.ybaoguide
+package com.ybao.guide
 
 import android.graphics.Color
 import android.os.Bundle
@@ -7,11 +7,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import com.ybao.guide.AttachedView
-import com.ybao.guide.Guide
-import com.ybao.guide.Indicator
+import com.ybao.guide.utils.showToastMsg
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.dip
+
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
                 .setTag("email")
                 .complete()
                 .addIndicator(password, Indicator.ROUND_RECTANGLE)
-                .setCorners(20)
+                .setCorners(dip(10))
                 .addAttachedView(
                         AttachedView(createTagView("圆角矩形高亮", 4))
                                 .setGravityX(AttachedView.GRAVITY_TO_TARGET, Gravity.RIGHT)
@@ -57,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 .setTag("btn_3")
                 .complete()
                 .addIndicator(btn_5, Indicator.OVAL)
-                .setPadding(20)
+                .setPadding(dip(10))
                 .addAttachedView(
                         AttachedView(createTagView("椭圆形高亮", 4))
                                 .setGravityX(AttachedView.GRAVITY_TO_TARGET, Gravity.CENTER_HORIZONTAL)
@@ -70,14 +69,13 @@ class LoginActivity : AppCompatActivity() {
                 .complete()
                 .create()
 
-        guide.setOnTouchGuideListener { indicator ->
-            Toast.makeText(this@LoginActivity, "Click " + indicator?.tag, Toast.LENGTH_SHORT).show()
+        guide.setOnClickIndicatorListener { idt ->
+            showToastMsg("Click " + idt?.tag)
             true
         }
         guide.show()
         button.setOnClickListener { guide.show() }
     }
-
 
     fun createTagView(msg: String, d: Int): View {
         val layoutId = when (d) {

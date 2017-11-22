@@ -1,4 +1,4 @@
-package com.ybao.ybaoguide
+package com.ybao.guide
 
 import org.junit.Test
 

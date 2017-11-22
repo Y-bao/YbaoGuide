@@ -2,6 +2,7 @@ package com.ybao.guide;
 
 import android.content.Context;
 import android.graphics.RectF;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -27,6 +28,7 @@ public class Indicator {
     List<AttachedView> attachedViews;
     List<AttachedViewFrctory> attachedViewFrctories;
     OnIndicatorListener onIndicatorListener;
+    OnClickIndicatorListener onClickIndicatorListener;
     boolean isOnAttached = false;
 
     public Indicator() {
@@ -74,6 +76,11 @@ public class Indicator {
 
     public Indicator setTag(String tag) {
         this.tag = tag;
+        return this;
+    }
+
+    public Indicator setOnClickIndicatorListener(OnClickIndicatorListener onClickIndicatorListener) {
+        this.onClickIndicatorListener = onClickIndicatorListener;
         return this;
     }
 
@@ -201,10 +208,17 @@ public class Indicator {
     }
 
     void onClick() {
+        if (onClickIndicatorListener != null) {
+            onClickIndicatorListener.onClickIndicator();
+        }
     }
 
     void onTouchCencl() {
         setTouchDown(false);
+    }
+
+    public interface OnClickIndicatorListener {
+        boolean onClickIndicator();
     }
 
     ViewTreeObserver.OnPreDrawListener onPreDrawListener = new ViewTreeObserver.OnPreDrawListener() {
