@@ -43,8 +43,6 @@ public class GuideGroup extends FrameLayout {
                 locationAttachedView();
             }
         });
-        setFocusable(true);
-        setFocusableInTouchMode(true);
     }
 
     private void initOverrideView() {
@@ -231,13 +229,13 @@ public class GuideGroup extends FrameLayout {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {//不起作用
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
             if (onTouchGuideListener != null && onTouchGuideListener.onKeyBack()) {
                 return true;
             }
         }
-        return super.onKeyDown(keyCode, event);
+        return super.dispatchKeyEvent(event);
     }
 
     @Override

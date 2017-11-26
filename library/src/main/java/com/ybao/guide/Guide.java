@@ -30,7 +30,8 @@ public class Guide {
         this.context = context;
         this.guideGroup = new GuideGroup(context, indicators);
         this.guideGroup.setOnTouchGuideListener(inOnTouchGuideListener);
-        setFocusable(true);
+        this.guideGroup.setFocusable(true);
+        this.guideGroup.setFocusableInTouchMode(true);
     }
 
     public Guide setBackground(Drawable drawable) {
@@ -45,11 +46,6 @@ public class Guide {
 
     public Guide setBackgroundResource(int resId) {
         setBackground(context.getResources().getDrawable(resId));
-        return this;
-    }
-
-    public Guide setFocusable(boolean focusable) {
-        this.guideGroup.setFocusable(focusable);
         return this;
     }
 
@@ -98,6 +94,7 @@ public class Guide {
                 onShowListener.onShow();
             }
         }
+        guideGroup.requestFocus();
         return this;
     }
 
@@ -132,8 +129,9 @@ public class Guide {
         public boolean onKeyBack() {
             if (cancelable) {
                 dismiss();
+                return true;
             }
-            return true;
+            return false;
         }
     };
 
