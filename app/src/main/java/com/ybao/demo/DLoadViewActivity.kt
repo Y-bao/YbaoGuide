@@ -18,8 +18,8 @@ import com.ybao.demo.helper.StandardAdapter
 import com.ybao.guide.AttachedView
 import com.ybao.guide.Guide
 import com.ybao.guide.Indicator
-import com.ybao.ui.guide.utils.createTagView
-import com.ybao.ui.guide.utils.showToastMsg
+import com.ybao.demo.utils.createTagView
+import com.ybao.demo.utils.showToastMsg
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 

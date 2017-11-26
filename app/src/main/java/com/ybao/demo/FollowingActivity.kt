@@ -12,7 +12,7 @@ import android.widget.LinearLayout
 import com.ybao.guide.AttachedView
 import com.ybao.guide.Guide
 import com.ybao.guide.Indicator
-import com.ybao.ui.guide.utils.createTagView
+import com.ybao.demo.utils.createTagView
 import org.jetbrains.anko.button
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.linearLayout

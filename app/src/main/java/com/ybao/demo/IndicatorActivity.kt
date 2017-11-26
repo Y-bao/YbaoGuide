@@ -9,10 +9,10 @@ import android.view.Gravity
 import com.ybao.guide.AttachedView
 import com.ybao.guide.Guide
 import com.ybao.guide.Indicator
-import com.ybao.ui.guide.utils.showToastMsg
+import com.ybao.demo.utils.showToastMsg
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.dip
-import com.ybao.ui.guide.utils.createTagView
+import com.ybao.demo.utils.createTagView
 
 
 class IndicatorActivity : AppCompatActivity() {
