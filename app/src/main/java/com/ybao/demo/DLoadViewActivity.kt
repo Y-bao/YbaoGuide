@@ -15,9 +15,9 @@ import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ybao.demo.helper.StandardAdapter
-import com.ybao.ui.guide.AttachedView
-import com.ybao.ui.guide.Guide
-import com.ybao.ui.guide.Indicator
+import com.ybao.guide.AttachedView
+import com.ybao.guide.Guide
+import com.ybao.guide.Indicator
 import com.ybao.ui.guide.utils.createTagView
 import com.ybao.ui.guide.utils.showToastMsg
 import org.jetbrains.anko.*

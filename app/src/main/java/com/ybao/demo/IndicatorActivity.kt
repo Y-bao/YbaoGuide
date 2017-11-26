@@ -6,9 +6,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
-import com.ybao.ui.guide.AttachedView
-import com.ybao.ui.guide.Guide
-import com.ybao.ui.guide.Indicator
+import com.ybao.guide.AttachedView
+import com.ybao.guide.Guide
+import com.ybao.guide.Indicator
 import com.ybao.ui.guide.utils.showToastMsg
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.dip

@@ -1,4 +1,4 @@
-package com.ybao.ui.guide;
+package com.ybao.guide;
 
 import android.view.Gravity;
 import android.view.View;

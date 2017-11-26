@@ -9,9 +9,9 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
-import com.ybao.ui.guide.AttachedView
-import com.ybao.ui.guide.Guide
-import com.ybao.ui.guide.Indicator
+import com.ybao.guide.AttachedView
+import com.ybao.guide.Guide
+import com.ybao.guide.Indicator
 import com.ybao.ui.guide.utils.createTagView
 import org.jetbrains.anko.button
 import org.jetbrains.anko.dip

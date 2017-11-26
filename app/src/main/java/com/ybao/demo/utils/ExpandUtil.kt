@@ -1,4 +1,4 @@
-package com.ybao.ui.guide.utils
+package com.ybao.demo.utils
 
 import android.content.Context
 import android.view.LayoutInflater
