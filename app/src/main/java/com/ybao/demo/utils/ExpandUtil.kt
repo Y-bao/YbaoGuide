@@ -1,11 +1,11 @@
-package com.ybao.guide.utils
+package com.ybao.ui.guide.utils
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.ybao.guide.R
+import com.ybao.demo.R
 
 /**
  * Created by Y-bao on 2017/11/22 0022.

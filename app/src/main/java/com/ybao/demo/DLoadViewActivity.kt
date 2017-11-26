@@ -1,4 +1,4 @@
-package com.ybao.guide
+package com.ybao.demo
 
 import android.content.Context
 import android.content.Intent
@@ -14,9 +14,12 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.ybao.guide.helper.StandardAdapter
-import com.ybao.guide.utils.createTagView
-import com.ybao.guide.utils.showToastMsg
+import com.ybao.demo.helper.StandardAdapter
+import com.ybao.ui.guide.AttachedView
+import com.ybao.ui.guide.Guide
+import com.ybao.ui.guide.Indicator
+import com.ybao.ui.guide.utils.createTagView
+import com.ybao.ui.guide.utils.showToastMsg
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
@@ -24,10 +27,10 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
  * Created by Y-bao on 2017/11/22 0022.
  */
 
-class AnkoActivity : AppCompatActivity() {
+class DLoadViewActivity : AppCompatActivity() {
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, AnkoActivity::class.java)
+            return Intent(context, DLoadViewActivity::class.java)
         }
     }
 
@@ -41,24 +44,24 @@ class AnkoActivity : AppCompatActivity() {
                 width = ViewGroup.LayoutParams.MATCH_PARENT
                 height = ViewGroup.LayoutParams.MATCH_PARENT
             }
-            layoutManager = GridLayoutManager(this@AnkoActivity, 2)
+            layoutManager = GridLayoutManager(this@DLoadViewActivity, 2)
         }
         rv.adapter = adapter
         Guide.Builder(this)
                 .setBackgroundColor(Color.parseColor("#aa000000"))
                 .addIndicator(object : Indicator() {
                     var listener = ViewTreeObserver.OnGlobalLayoutListener {
-                        targetView = rv.getChildAt(10)
+                        setTargetView(rv.getChildAt(10))
                     }
 
                     override fun onAttached() {
                         super.onAttached()
-                        rv.viewTreeObserver.addOnGlobalLayoutListener(listener);
+                        rv.viewTreeObserver.addOnGlobalLayoutListener(listener)
                     }
 
                     override fun onDetached() {
                         super.onDetached()
-                        rv.viewTreeObserver.removeOnGlobalLayoutListener(listener);
+                        rv.viewTreeObserver.removeOnGlobalLayoutListener(listener)
                     }
                 }).setMode(Indicator.ROUND_RECTANGLE)
                 .setCorners(dip(8))

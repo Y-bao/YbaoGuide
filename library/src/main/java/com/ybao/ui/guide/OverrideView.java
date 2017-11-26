@@ -1,4 +1,4 @@
-package com.ybao.guide;
+package com.ybao.ui.guide;
 
 import android.content.Context;
 import android.graphics.Bitmap;

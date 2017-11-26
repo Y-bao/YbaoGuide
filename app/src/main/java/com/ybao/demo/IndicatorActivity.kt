@@ -1,4 +1,4 @@
-package com.ybao.guide
+package com.ybao.demo
 
 import android.content.Context
 import android.content.Intent
@@ -6,18 +6,19 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.TextView
-import com.ybao.guide.utils.showToastMsg
+import com.ybao.ui.guide.AttachedView
+import com.ybao.ui.guide.Guide
+import com.ybao.ui.guide.Indicator
+import com.ybao.ui.guide.utils.showToastMsg
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.dip
+import com.ybao.ui.guide.utils.createTagView
 
 
-class LoginActivity : AppCompatActivity() {
+class IndicatorActivity : AppCompatActivity() {
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, LoginActivity::class.java)
+            return Intent(context, IndicatorActivity::class.java)
         }
     }
 
@@ -83,24 +84,5 @@ class LoginActivity : AppCompatActivity() {
         }
         guide.show()
         button.setOnClickListener { guide.show() }
-    }
-
-    fun createTagView(msg: String, d: Int): View {
-        val layoutId = when (d) {
-            1 ->
-                R.layout.view_tag_left
-            2 ->
-                R.layout.view_tag_top
-            3 ->
-                R.layout.view_tag_right
-            4 ->
-                R.layout.view_tag_bottom
-            else ->
-                R.layout.view_tag_top
-        }
-        val tagView = LayoutInflater.from(this).inflate(layoutId, null, false)
-        val txtTag = tagView.findViewById<TextView>(R.id.txt_tag)
-        txtTag.text = msg
-        return tagView
     }
 }

@@ -1,4 +1,4 @@
-package com.ybao.guide;
+package com.ybao.ui.guide;
 
 import android.app.Activity;
 import android.content.Context;

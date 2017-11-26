@@ -6,7 +6,7 @@
  * @date 2015年6月8日 下午4:23:15
  * @version V1.0
  */
-package com.ybao.guide.helper;
+package com.ybao.demo.helper;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;

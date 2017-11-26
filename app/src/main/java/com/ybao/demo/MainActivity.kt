@@ -1,4 +1,4 @@
-package com.ybao.guide
+package com.ybao.demo
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -18,12 +18,12 @@ class MainActivity : AppCompatActivity() {
         linearLayout {
             orientation = LinearLayout.VERTICAL
             button("各种高亮样式展示") {
-                onClick { startActivity(LoginActivity.newIntent(this@MainActivity)) }
+                onClick { startActivity(IndicatorActivity.newIntent(this@MainActivity)) }
             }.lparams {
                 width = ViewGroup.LayoutParams.MATCH_PARENT
             }
             button("监听延时加载的控件") {
-                onClick { startActivity(AnkoActivity.newIntent(this@MainActivity)) }
+                onClick { startActivity(DLoadViewActivity.newIntent(this@MainActivity)) }
             }.lparams {
                 topMargin = dip(10)
                 width = ViewGroup.LayoutParams.MATCH_PARENT

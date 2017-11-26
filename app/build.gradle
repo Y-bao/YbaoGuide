@@ -13,12 +13,11 @@ android {
     compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
 
     defaultConfig {
-        applicationId "com.ybao.guide"
+        applicationId "com.ybao.demo.guide"
         minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode VERSION_CODE as int
         versionName VERSION_NAME
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -33,9 +32,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:design:$support_version"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile "org.jetbrains.anko:anko-sdk15:0.9.1"
     compile "org.jetbrains.anko:anko-appcompat-v7:0.9.1"
     compile "org.jetbrains.anko:anko-design:0.9.1"
