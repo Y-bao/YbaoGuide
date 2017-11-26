@@ -112,10 +112,7 @@ public class Guide {
     GuideGroup.OnTouchGuideListener inOnTouchGuideListener = new GuideGroup.OnTouchGuideListener() {
         @Override
         public boolean onClickIndicator(Indicator indicator) {
-            if (onClickIndicatorListener != null) {
-                return onClickIndicatorListener.onClickIndicator(indicator);
-            }
-            return false;
+            return onClickIndicatorListener != null && onClickIndicatorListener.onClickIndicator(indicator);
         }
 
         @Override
@@ -171,7 +168,7 @@ public class Guide {
             return onAddIndicator(indicator);
         }
 
-        public Indicator onAddIndicator(Indicator indicator) {
+        private Indicator onAddIndicator(Indicator indicator) {
             if (indicators == null) {
                 indicators = new ArrayList<>();
             }
