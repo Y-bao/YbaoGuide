@@ -1,0 +1,4 @@
+ext {
+    VERSION_NAME = "1.0.0"
+    VERSION_CODE = 1
+}

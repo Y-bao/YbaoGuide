@@ -268,9 +268,11 @@ public class GuideGroup extends FrameLayout {
 
     Indicator.OnIndicatorListener onIndicatorListener = new Indicator.OnIndicatorListener() {
         @Override
-        public void onChange(Indicator indicator) {
+        public void onChange(Indicator indicator, boolean isMove) {
             overrideView.invalidate();
-            locationAttachedViewByIndicator(indicator);
+            if (isMove) {
+                locationAttachedViewByIndicator(indicator);
+            }
         }
     };
 

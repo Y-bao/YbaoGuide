@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 public class Indicator {
+    RectF oldRectF;
     public static int VIEW_ONESEIF = 0;
     public static int RECTANGLE = 1;
     public static int ROUND_RECTANGLE = 2;
@@ -225,7 +226,13 @@ public class Indicator {
         @Override
         public boolean onPreDraw() {
             if (onIndicatorListener != null) {
-                onIndicatorListener.onChange(Indicator.this);
+                RectF rectF = getRectF();
+                boolean isMove = false;
+                if (rectF == null || !rectF.equals(oldRectF)) {
+                    oldRectF = rectF;
+                    isMove = true;
+                }
+                onIndicatorListener.onChange(Indicator.this, isMove);
             }
             return true;
         }
@@ -236,6 +243,6 @@ public class Indicator {
     }
 
     public interface OnIndicatorListener {
-        void onChange(Indicator indicator);
+        void onChange(Indicator indicator, boolean isMove);
     }
 }
