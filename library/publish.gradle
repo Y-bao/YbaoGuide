@@ -1,40 +1,88 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
-apply plugin: 'com.novoda.bintray-release'
-
-publish {
-    userOrg = 'y-bao'//bintray.com用户名
-    groupId = 'com.ybao'//jcenter上的路径
-    artifactId = 'YbaoGuide'//项目名称
-    publishVersion = '1.0.0'//版本号
-    desc = 'GuideHelper'//描述，不重要
-    website = 'https://github.com/Y-bao/YbaoGuide'//网站，最好有，不重要
+def siteUrl = 'https://github.com/Y-bao/YbaoGuide'   // 项目的主页
+def issueUrl = 'https://github.com/Y-bao/YbaoGuide/issues'   // 项目的issues
+def gitUrl = 'https://github.com/Y-bao/YbaoGuide.git'   // Git仓库的url
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                name 'GuideHelper'     //项目的描述 你可以多写一点
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'Ybao'        //填写的一些基本信息
+                        name 'PyJiang'
+                        email '392579823@qq.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
 }
-task androidJavadocs(type: Javadoc) {
-    options.encoding = "utf-8"
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
-    from androidJavadocs.destinationDir
+    from javadoc.destinationDir
 }
-
-task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.sourceFiles
-}
-
 artifacts {
-    archives androidSourcesJar
-    archives androidJavadocsJar
+    archives javadocJar
+    archives sourcesJar
 }
-
-javadoc {
-    options{
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        author true
-        version true
-        links "http://docs.oracle.com/javase/7/docs/api"
+Properties properties = new Properties()
+//读取properties的配置信息，当然直接把信息写到代码里也是可以的
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"          //这个应该是传到maven的仓库的
+        name = "YbaoGuide"    //发布的项目名字
+        websiteUrl = siteUrl
+        issueTrackerUrl = issueUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+        version {
+            name = "1.0.0"
+        }
     }
 }
+
+
+
+
+//
+//apply plugin: 'com.novoda.bintray-release'
+//publish {
+//    userOrg = 'y-bao'//bintray.com用户名
+//    groupId = 'com.ybao'//jcenter上的路径
+//    artifactId = 'YbaoGuide'//项目名称
+//    publishVersion = '1.0.0'//版本号
+//    desc = 'GuideHelper'//描述，不重要
+//    website = 'https://github.com/Y-bao/YbaoGuide'//网站，最好有，不重要
+//}
