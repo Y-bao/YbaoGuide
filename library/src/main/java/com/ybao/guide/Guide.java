@@ -122,11 +122,10 @@ public class Guide {
         }
 
         @Override
-        public boolean onTouchOverride() {
+        public void onTouchOverride() {
             if (canceledOnTouchOutside) {
                 dismiss();
             }
-            return false;
         }
 
         @Override

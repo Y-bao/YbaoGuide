@@ -279,7 +279,7 @@ public class GuideGroup extends FrameLayout {
     public interface OnTouchGuideListener {
         boolean onClickIndicator(Indicator indicator);
 
-        boolean onTouchOverride();
+        void onTouchOverride();
 
         boolean onKeyBack();
     }
