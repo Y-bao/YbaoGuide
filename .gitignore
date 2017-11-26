@@ -49,4 +49,4 @@ build
 Network Trash Folder
 Temporary Items
 .apdisk
-local.properties
+bintray.properties

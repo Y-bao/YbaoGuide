@@ -1,20 +1,58 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def siteUrl = 'https://github.com/Y-bao/YbaoGuide'   // 项目的主页
-def issueUrl = 'https://github.com/Y-bao/YbaoGuide/issues'   // 项目的issues
-def gitUrl = 'https://github.com/Y-bao/YbaoGuide.git'   // Git仓库的url
+//加载属性文件
+Properties properties = new Properties()
+File localPropertiesFile = project.file("bintray.properties")
+if (localPropertiesFile.exists()) {
+    properties.load(localPropertiesFile.newDataInputStream())
+}
+File projectPropertiesFile = project.file("project.properties")
+if (projectPropertiesFile.exists()) {
+    properties.load(projectPropertiesFile.newDataInputStream())
+}
+
+//读取属性
+def projectRepositoryName = properties.getProperty("project.repositoryName")
+def projectName = properties.getProperty("project.name")
+def projectGroupId = properties.getProperty("project.groupId")
+def projectArtifactId = properties.getProperty("project.artifactId")
+def projectVersionName = VERSION_NAME
+def projectPackaging = properties.getProperty("project.packaging")
+def projectSiteUrl = properties.getProperty("project.siteUrl")
+def projectGitUrl = "${projectSiteUrl}.git"
+def projectissueUrl = "${projectSiteUrl}/issues"
+
+def developerId = properties.getProperty("developer.id")
+def developerName = properties.getProperty("developer.name")
+def developerEmail = properties.getProperty("developer.email")
+
+def bintrayUser = properties.getProperty("bintray.user")
+def bintrayApikey = properties.getProperty("bintray.apiKey")
+def bintrayOrganizationId = properties.getProperty("bintray.organizationId")
+
+def javadocName = properties.getProperty("javadoc.name")
+
+/*
+*这句代码一定要加否则会出现如下错误
+* Could not upload to 'https://api.bintray.com/content/coolcode/maven/LibUiBase/1.0.0/CommonLibrary/LibUiBase/1.0.0/LibUiBase-1.0.0.pom': HTTP/1.1 400 Bad Request [
+message:Unable to upload files: Maven group, artifact or version defined in the pom file do not match the file path 'CommonLibrary/LibUiBase/1.0.0/LibUiBase-1.0.0.p
+om']
+* */
+version = projectVersionName
+group = projectGroupId
+
+// 配置生成POM.xml文件的参数
 install {
     repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
         pom {
             project {
-                packaging 'aar'
-                // Add your description here
-                name 'GuideHelper'     //项目的描述 你可以多写一点
-                url siteUrl
-                version VERSION_NAME
-                // Set your license
+                name projectName
+                groupId projectGroupId
+                artifactId projectArtifactId
+                version projectVersionName
+                packaging projectPackaging
+                url projectSiteUrl
                 licenses {
                     license {
                         name 'The Apache Software License, Version 2.0'
@@ -23,67 +61,75 @@ install {
                 }
                 developers {
                     developer {
-                        id 'Ybao'        //填写的一些基本信息
-                        name 'PyJiang'
-                        email '392579823@qq.com'
+                        id developerId
+                        name developerName
+                        email developerEmail
                     }
                 }
                 scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
+                    connection projectGitUrl
+                    developerConnection projectGitUrl
+                    url projectSiteUrl
                 }
             }
         }
     }
 }
+
+//生成sources.jar
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
 }
+
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
+
+//生成javadoc.jar
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
+
 artifacts {
     archives javadocJar
     archives sourcesJar
 }
-Properties properties = new Properties()
-//读取properties的配置信息，当然直接把信息写到代码里也是可以的
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-    configurations = ['archives']
-    pkg {
-        repo = "maven"          //这个应该是传到maven的仓库的
-        name = "YbaoGuide"    //发布的项目名字
-        websiteUrl = siteUrl
-        issueTrackerUrl = issueUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-        version {
-            name = VERSION_NAME
-        }
+
+//javadoc的配置
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version projectVersionName
+        links "http://docs.oracle.com/javase/7/docs/api"
+        title javadocName
     }
 }
 
-
-
-
-//
-//apply plugin: 'com.novoda.bintray-release'
-//publish {
-//    userOrg = 'y-bao'//bintray.com用户名
-//    groupId = 'com.ybao'//jcenter上的路径
-//    artifactId = 'YbaoGuide'//项目名称
-//    publishVersion = '1.0.0'//版本号
-//    desc = 'GuideHelper'//描述，不重要
-//    website = 'https://github.com/Y-bao/YbaoGuide'//网站，最好有，不重要
-//}
+/*
+*userOrg为bintray账号信息里面的Organization Id
+*repo为你创建的仓库名称
+* 如果上述两个字段写错了，则会出现下面类似的错误
+*Could not create package 'huangxuanheng/maven/fragmentstack': HTTP/1.1 404 Not Found [message:Repo 'maven' was not found]
+*
+*
+* */
+bintray {
+    user = bintrayUser
+    key = bintrayApikey
+    configurations = ['archives']
+    pkg {
+        userOrg = bintrayOrganizationId
+        repo = projectRepositoryName
+        name = projectName
+        websiteUrl = projectSiteUrl
+        issueTrackerUrl = projectissueUrl
+        vcsUrl = projectGitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
