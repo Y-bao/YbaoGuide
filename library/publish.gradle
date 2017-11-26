@@ -13,6 +13,7 @@ install {
                 // Add your description here
                 name 'GuideHelper'     //项目的描述 你可以多写一点
                 url siteUrl
+                version VERSION_NAME
                 // Set your license
                 licenses {
                     license {
@@ -56,8 +57,6 @@ Properties properties = new Properties()
 //读取properties的配置信息，当然直接把信息写到代码里也是可以的
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
         repo = "maven"          //这个应该是传到maven的仓库的
@@ -68,7 +67,7 @@ bintray {
         licenses = ["Apache-2.0"]
         publish = true
         version {
-            name = "1.0.0"
+            name = VERSION_NAME
         }
     }
 }
