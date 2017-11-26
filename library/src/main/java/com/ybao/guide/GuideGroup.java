@@ -3,7 +3,6 @@ package com.ybao.guide;
 import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -31,7 +30,7 @@ public class GuideGroup extends FrameLayout {
     private int touchPenetrationMode = TOUCH_PENETRATION_NONE;
 
 
-    GuideGroup(@NonNull Context context, List<Indicator> indicators) {
+    GuideGroup(Context context, List<Indicator> indicators) {
         super(context);
         this.indicators = indicators;
         initOverrideView();

@@ -2,7 +2,6 @@ package com.ybao.guide;
 
 import android.content.Context;
 import android.graphics.RectF;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewTreeObserver;
 

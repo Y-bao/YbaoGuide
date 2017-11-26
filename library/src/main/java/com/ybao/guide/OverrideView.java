@@ -10,7 +10,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -26,7 +25,7 @@ class OverrideView extends FrameLayout {
     List<Indicator> indicators;
     private View bgView;
 
-    public OverrideView(@NonNull Context context, List<Indicator> indicators) {
+    public OverrideView(Context context, List<Indicator> indicators) {
         super(context);
         this.indicators = indicators;
         init();
